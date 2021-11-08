@@ -225,3 +225,7 @@ body {
   display: inline;
   margin-right: 10px;
 }
+
+.searchBar {
+  text-align: center;
+}

@@ -27,8 +27,8 @@ function Card(props) {
                             return <p>{bullet}</p>
                         }) : ""
                     }
-                    {                    // eslint-disable-next-line react/jsx-no-target-blank
-                    }                    <a href={props.link} target="_blank"><button class="linkButton">View on website</button></a>
+                    {// eslint-disable-next-line react/jsx-no-target-blank
+                    }<a href={props.link} target="_blank"><button class="linkButton">View on website</button></a>
                 </tr>
             </table>
         </div>

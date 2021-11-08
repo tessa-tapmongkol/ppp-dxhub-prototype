@@ -47,10 +47,6 @@
     color: white;
 }
 
-.cardCheckbox {
-    margin-left: 13rem;
-}
-
 /* mobile */
 @media screen and (max-width: 480px) {
     .cardTitle {

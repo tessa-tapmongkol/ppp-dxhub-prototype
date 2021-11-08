@@ -10,13 +10,13 @@ function ComparePage(props) {
     const [similar, setSimilar] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
-    const url = "https://5e7hnb1vb3.execute-api.us-west-2.amazonaws.com/dev/product-data?query=" + props.query.toLowerCase() + "&category=" + props.category;
+    const url = process.env.REACT_APP_API_URL + props.query.toLowerCase() + "&category=" + props.category;
 
     async function fetchAll() {
         try {
             return await axios.get(url, {
                 headers: {
-                    'x-api-key': 'UFhm8UKURx8cekP1pcn1N9sVlHWcQPpn5yj3JETw',
+                    'x-api-key': process.env.REACT_APP_API_KEY,
                     'Content-Type': 'application/json'
                 }
             });
@@ -29,8 +29,11 @@ function ComparePage(props) {
     React.useEffect(() => {
         fetchAll().then(result => {
             if (result && result !== undefined) {
-                parseTargetItems(result.data.stores.target);
+                if (props.query === "Beef") parseTargetItems(result.data.stores.target.California["5659"]);
+                else parseTargetItems(result.data.stores.target);
                 parseWalmartItems(result.data.stores.walmart);
+                parseNoonItems(result.data.stores.noon);
+                parseUbuyItems(result.data.stores.ubuy);
                 setLoading(false);
             }
         })
@@ -52,7 +55,7 @@ function ComparePage(props) {
                 price={prod.price}
                 desc={prod.desc}
                 link={prod.link}
-                key={prod.name}
+                key={prod.name + prod.link}
                 similar={similar}
                 setSimilar={setSimilar}
                 index={index}
@@ -66,12 +69,12 @@ function ComparePage(props) {
             const prod = prods[key];
             targetItems.push({
                 store: "Target",
-                brand: prod.info.primary_brand.name,
-                name: prod.info.product_description.title,
-                image: prod.info.enrichment.images.primary_image_url,
-                price: prod.pricing.current_retail,
-                desc: prod.info.product_description.soft_bullets,
-                link: prod.info.enrichment.buy_url
+                brand: prod?.info?.primary_brand?.name,
+                name: prod?.info?.product_description?.title,
+                image: prod?.info?.enrichment?.images?.primary_image_url,
+                price: prod?.pricing?.current_retail,
+                desc: prod?.info?.product_description?.soft_bullets,
+                link: prod?.info?.enrichment?.buy_url
             })
         }
         setData(oldData => [...oldData, ...targetItems]);
@@ -81,13 +84,13 @@ function ComparePage(props) {
         const walmartItems = [];
         for (const key in prods) {
             const prod = prods[key];
-            const prodUrl = "https://www.walmart.com/" + prod.info.productUrl
+            const prodUrl = "https://www.walmart.com/" + prod?.info?.productUrl;
             walmartItems.push({
                 store: "Walmart",
-                brand: prod.info.name,
-                name: prod.info.name,
-                image: prod.info.image.thumbnail,
-                price: prod.pricing.displayPrice,
+                brand: prod?.info?.name,
+                name: prod?.info?.name,
+                image: prod?.info?.image?.thumbnail,
+                price: prod?.pricing?.displayPrice,
                 desc: [""],
                 link: prodUrl
             })
@@ -95,10 +98,48 @@ function ComparePage(props) {
         setData(oldData => [...oldData, ...walmartItems]);
     }
 
+    function parseNoonItems(prods) {
+        const noonItems = [];
+        for (const key in prods) {
+            const prod = prods[key];
+            const prodUrl = "https://www.noon.com/uae-en/" + prod?.url + "/p?o=";
+            const image = "https://z.nooncdn.com/products/tr:n-t_80/" + prod?.images?.image_keys[0] + ".jpg";
+            noonItems.push({
+                store: "Noon",
+                brand: prod?.brand,
+                name: prod?.name,
+                image: image,
+                price: prod?.pricing?.price,
+                desc: [""],
+                link: prodUrl
+            })
+        }
+        setData(oldData => [...oldData, ...noonItems]);
+    }
+
+    function parseUbuyItems(prods) {
+        const ubuyItems = [];
+        for (const key in prods) {
+            const prod = prods[key];
+            ubuyItems.push({
+                store: "Ubuy",
+                brand: "",
+                name: prod?.specifications,
+                image: prod?.image,
+                price: prod?.price,
+                desc: [prod?.description],
+                link: ""
+            })
+        }
+        setData(oldData => [...oldData, ...ubuyItems]);
+    }
+
     return (
         <body>
             <Link to={"/subcategories/" + props.category}><button className="subcategoryButton">Back to list of subcategories</button></Link>
             <Link to="/"><button className="searchButton">Back to search</button></Link>
+            <br />
+            <br />
             <h1>{styleSubcategory(props.query)}</h1>
             <div className="compareHeader">
                 <h3>Select items that are similar</h3>

@@ -1,17 +1,12 @@
 import React from "react";
 import AutoSuggest from "react-autosuggest";
 import { Link } from "react-router-dom";
+import { styleCategory } from "./../../constants/stringFunctions"
+import { categories } from "./../../constants/subcategoryitems";
 
 function SearchBar(props) {
     const [search, setSearch] = React.useState("");
     const [suggestions, setSuggestions] = React.useState([]);
-
-    const categories = [
-        "oils_fats",
-        "milk_cheese_eggs",
-        "meat",
-        "fish_seafood"
-    ];
 
     function getSuggestions(value) {
         return categories.filter(category => category.toLowerCase().includes(value.toLowerCase()));
@@ -31,7 +26,7 @@ function SearchBar(props) {
                     setSearch("");
                 }}
                 getSuggestionValue={suggestion => suggestion}
-                renderSuggestion={suggestion => <Link to={"/subcategories/" + suggestion.toLowerCase()}><span>{suggestion}</span></Link>}
+                renderSuggestion={suggestion => <Link to={"/subcategories/" + suggestion.toLowerCase()}><span>{styleCategory(suggestion)}</span></Link>}
                 inputProps={{
                     placeholder: "Search category",
                     value: search,
@@ -39,7 +34,6 @@ function SearchBar(props) {
                         setSearch(newValue);
                     } 
                 }}
-                className="search"
             />
         </div>
     );
