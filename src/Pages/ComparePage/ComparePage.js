@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import Card from "../../Components/Card/Card";
 import axios from "axios";
 import { styleSubcategory } from "../../constants/stringFunctions";
+import { Oval } from 'react-loading-icons'
 
 function ComparePage(props) {
     const [data, setData] = React.useState([]);
     const [similar, setSimilar] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
 
     const url = "https://5e7hnb1vb3.execute-api.us-west-2.amazonaws.com/dev/product-data?query=" + props.query.toLowerCase() + "&category=" + props.category;
 
@@ -14,7 +16,7 @@ function ComparePage(props) {
         try {
             return await axios.get(url, {
                 headers: {
-                    'x-api-key': '',
+                    'x-api-key': 'UFhm8UKURx8cekP1pcn1N9sVlHWcQPpn5yj3JETw',
                     'Content-Type': 'application/json'
                 }
             });
@@ -29,6 +31,7 @@ function ComparePage(props) {
             if (result && result !== undefined) {
                 parseTargetItems(result.data.stores.target);
                 parseWalmartItems(result.data.stores.walmart);
+                setLoading(false);
             }
         })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,11 +95,9 @@ function ComparePage(props) {
         setData(oldData => [...oldData, ...walmartItems]);
     }
 
-    console.log(similar);
-
     return (
         <body>
-            <Link to={"/subcategories/" + props.category}><button className="subcategoryButton">Back to subcategories</button></Link>
+            <Link to={"/subcategories/" + props.category}><button className="subcategoryButton">Back to list of subcategories</button></Link>
             <Link to="/"><button className="searchButton">Back to search</button></Link>
             <h1>{styleSubcategory(props.query)}</h1>
             <div className="compareHeader">
@@ -105,7 +106,7 @@ function ComparePage(props) {
             </div>
             <div className="comparePage">
                 <div className="compareCards">
-                    {data.map((targetProd, index) => { return getCards(targetProd, index); })}
+                    {!loading ? data.map((targetProd, index) => { return getCards(targetProd, index); }) : <Oval fill="transparent" stroke="#06bcee" strokeOpacity={1} strokeWidth={2} />}
                 </div>
             </div>
         </body>

@@ -132,6 +132,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .linkButton {
@@ -200,6 +201,7 @@ body {
 
 .comparePage{
   margin-left: 5px;
+  text-align: center;
 }
 
 
@@ -209,9 +211,11 @@ body {
   justify-content: space-between;
   z-index: 2;
   background-color: white;
-  width: 95%;
+  width: 100%;
   background: white;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
+  align-items: baseline;
+  padding: 10px 0;
 }
