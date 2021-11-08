@@ -92,8 +92,13 @@ body {
   touch-action: manipulation;
 }
 
-.seachButton:disabled {
+.seachButton:disabled, .subcategoryButton:disabled {
   cursor: default;
+}
+
+
+.searchButton:focus, .subcategoryButton:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
 
 .subcategoryButton {
@@ -122,10 +127,6 @@ body {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-}
-
-.searchButton:focus {
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
 
 .compareCards {
@@ -218,4 +219,9 @@ body {
   top: 0px;
   align-items: baseline;
   padding: 10px 0;
+}
+
+.itemsSelected {
+  display: inline;
+  margin-right: 10px;
 }

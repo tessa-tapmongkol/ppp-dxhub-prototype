@@ -34,7 +34,7 @@ function ComparePage(props) {
                 setLoading(false);
             }
         })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     function removeProd() {
@@ -102,7 +102,7 @@ function ComparePage(props) {
             <h1>{styleSubcategory(props.query)}</h1>
             <div className="compareHeader">
                 <h3>Select items that are similar</h3>
-                <button className="compareButton" onClick={() => { removeProd(); }}>These selected items are similar</button>
+                <button className="compareButton" onClick={() => { removeProd(); }}>{"These " + similar.length + " items are similar"}</button>
             </div>
             <div className="comparePage">
                 <div className="compareCards">
