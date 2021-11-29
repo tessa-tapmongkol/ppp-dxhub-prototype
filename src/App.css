@@ -129,7 +129,7 @@ body {
   touch-action: manipulation;
 }
 
-.compareCards {
+.cardColumns {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

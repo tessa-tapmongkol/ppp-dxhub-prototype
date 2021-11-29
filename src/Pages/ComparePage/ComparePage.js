@@ -1,14 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Card from "../../Components/Card/Card";
 import axios from "axios";
 import { styleSubcategory } from "../../constants/stringFunctions";
-import { Oval } from 'react-loading-icons'
+import { Oval } from 'react-loading-icons';
+import { DragDropContext } from "react-beautiful-dnd";
+import CardColumn from "../../Components/CardColumn/CardColumn";
 
 function ComparePage(props) {
-    const [data, setData] = React.useState([]);
-    const [similar, setSimilar] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [data, setData] = React.useState({
+        columns: {
+            'column-1': {
+                id: 'column-1',
+                title: 'All items',
+                data: []
+            },
+            'column-2': {
+                id: 'column-2',
+                title: 'Category 1',
+                data: []
+            },
+            'column-3': {
+                id: 'column-3',
+                title: 'Category 2',
+                data: []
+            }
+        },
+        columnOrder: ['column-1', 'column-2', 'column-3']
+    })
 
     const url = process.env.REACT_APP_API_URL + props.query.toLowerCase() + "&category=" + props.category;
 
@@ -40,29 +59,6 @@ function ComparePage(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    function removeProd() {
-        setData(data.filter((prod, i) => { return !similar.includes(i); }));
-        setSimilar([]);
-    }
-
-    function getCards(prod, index) {
-        return (
-            <Card
-                store={prod.store}
-                brand={prod.brand}
-                name={prod.name}
-                image={prod.image}
-                price={prod.price}
-                desc={prod.desc}
-                link={prod.link}
-                key={prod.name + prod.link}
-                similar={similar}
-                setSimilar={setSimilar}
-                index={index}
-            />
-        );
-    }
-
     function parseTargetItems(prods) {
         const targetItems = [];
         for (const key in prods) {
@@ -77,7 +73,9 @@ function ComparePage(props) {
                 link: prod?.info?.enrichment?.buy_url
             })
         }
-        setData(oldData => [...oldData, ...targetItems]);
+        const newData = data;
+        newData.columns['column-1'].data.push(...targetItems);
+        setData(newData);
     }
 
     function parseWalmartItems(prods) {
@@ -95,7 +93,9 @@ function ComparePage(props) {
                 link: prodUrl
             })
         }
-        setData(oldData => [...oldData, ...walmartItems]);
+        const newData = data;
+        newData.columns['column-1'].data.push(...walmartItems);
+        setData(newData);
     }
 
     function parseNoonItems(prods) {
@@ -114,7 +114,9 @@ function ComparePage(props) {
                 link: prodUrl
             })
         }
-        setData(oldData => [...oldData, ...noonItems]);
+        const newData = data;
+        newData.columns['column-1'].data.push(...noonItems);
+        setData(newData);
     }
 
     function parseUbuyItems(prods) {
@@ -131,7 +133,57 @@ function ComparePage(props) {
                 link: ""
             })
         }
-        setData(oldData => [...oldData, ...ubuyItems]);
+        const newData = data;
+        newData.columns['column-1'].data.push(...ubuyItems);
+        setData(newData);
+    }
+
+    function onDragEnd(result) {
+        const { destination, source } = result;
+        if (!destination) return;
+        if (destination.droppableId === source.droppableId && destination.index === source.index) return;
+        const start = data.columns[source.droppableId];
+        const end = data.columns[destination.droppableId];
+        if (start === end) {
+            const newData = Array.from(start.data);
+            const [reordered] = newData.splice(source.index, 1);
+            newData.splice(destination.index, 0, reordered);
+            const newColumn = {
+                ...start,
+                data: newData
+            };
+            const newSameColumnData = {
+                ...data,
+                columns: {
+                    ...data.columns,
+                    [newColumn.id]: newColumn
+                }
+            }
+            setData(newSameColumnData);
+            return;
+        }
+        const newStartData = Array.from(start.data);
+        const [reorderedCol] = newStartData.splice(source.index, 1);
+        const newStart = {
+            ...start,
+            data: newStartData
+        };
+
+        const newEndData = Array.from(end.data);
+        newEndData.splice(destination.index, 0, reorderedCol);
+        const newEnd = {
+            ...end,
+            data: newEndData
+        };
+        const newColumnData = {
+            ...data,
+            columns: {
+                ...data.columns,
+                [newStart.id]: newStart,
+                [newEnd.id]: newEnd
+            }
+        }
+        setData(newColumnData);
     }
 
     return (
@@ -141,15 +193,25 @@ function ComparePage(props) {
             <br />
             <br />
             <h1>{styleSubcategory(props.query)}</h1>
-            <div className="compareHeader">
-                <h3>Select items that are similar</h3>
-                <button className="compareButton" onClick={() => { removeProd(); }}>{"These " + similar.length + " items are similar"}</button>
-            </div>
-            <div className="comparePage">
-                <div className="compareCards">
-                    {!loading ? data.map((targetProd, index) => { return getCards(targetProd, index); }) : <Oval fill="transparent" stroke="#06bcee" strokeOpacity={1} strokeWidth={2} />}
+            <DragDropContext onDragEnd={onDragEnd}>
+                <div className="comparePage">
+                    {!loading ? (
+                        <div className="cardColumns">
+                            {data.columnOrder.map(columnId => {
+                                const column = data.columns[columnId];
+                                console.log(column)
+                                return (
+                                    <CardColumn
+                                        title={column.title}
+                                        id={column.id}
+                                        cards={column.data}
+                                    />
+                                )
+                            })}
+                        </div>
+                    ) : <Oval fill="transparent" stroke="#06bcee" strokeOpacity={1} strokeWidth={2} />}
                 </div>
-            </div>
+            </DragDropContext>
         </body>
     )
 }
