@@ -5,13 +5,15 @@ import Card from "../Card/Card";
 const Container = styled.div`
     width: 23rem;
     height: 100%;
-    background-color: ${props => (props.isDraggingOver ? '#8FBC8F' : 'white')};
+    background-color: ${props => (props.isDraggingOver ? '#bee7be' : 'white')};
+    border-radius: 6px;
+    margin-top: 0;
 `
 
 export default function CardColumn(props) {
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>{props.title + " (" + props.cards.length + ")"}</h3>
             <Droppable droppableId={props.id}>
                 {(provided, snapshot) => (
                     <Container

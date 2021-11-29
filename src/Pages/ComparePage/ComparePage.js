@@ -17,12 +17,12 @@ function ComparePage(props) {
             },
             'column-2': {
                 id: 'column-2',
-                title: 'Category 1',
+                title: 'Category One',
                 data: []
             },
             'column-3': {
                 id: 'column-3',
-                title: 'Category 2',
+                title: 'Category Two',
                 data: []
             }
         },
@@ -186,13 +186,35 @@ function ComparePage(props) {
         setData(newColumnData);
     }
 
+    function onClickSubmit() {
+        const newColumnData = {
+            ...data,
+            columns: {
+                ...data.columns
+            }
+        }
+        data.columnOrder.forEach((columnId) => {
+            if(columnId !== 'column-1') {
+                const newCol = {
+                    ...data.columns[columnId],
+                    data: []
+                }
+                newColumnData.columns[columnId] = newCol;
+            }
+        });
+        setData(newColumnData);
+    }
+
     return (
         <body>
             <Link to={"/subcategories/" + props.category}><button className="subcategoryButton">Back to list of subcategories</button></Link>
             <Link to="/"><button className="searchButton">Back to search</button></Link>
             <br />
             <br />
-            <h1>{styleSubcategory(props.query)}</h1>
+            <div className="subcategoryHeader">
+                <h1>{styleSubcategory(props.query)}</h1>
+                <button className="searchButton" onClick={onClickSubmit}>Submit</button>
+            </div>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="comparePage">
                     {!loading ? (
