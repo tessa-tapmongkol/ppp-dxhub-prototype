@@ -1,18 +1,26 @@
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import Card from "../Card/Card";
+import Tile from "../Tile/Tile";
 
 const Container = styled.div`
-    width: 23rem;
-    height: 100%;
+    width: 23.5rem;
+    min-height: 65vh;
+    height: fit-content;
     background-color: ${props => (props.isDraggingOver ? '#bee7be' : 'white')};
     border-radius: 6px;
-    margin-top: 0;
+`
+
+const CardCol = styled.div`
+    padding: 0 10px;
+    border: 0.1px solid black;
+    margin-right: 10px;
+    border-radius: 6px;
 `
 
 export default function CardColumn(props) {
     return (
-        <div>
+        <CardCol>
             <h3>{props.title + " (" + props.cards.length + ")"}</h3>
             <Droppable droppableId={props.id}>
                 {(provided, snapshot) => (
@@ -23,24 +31,34 @@ export default function CardColumn(props) {
                     >
                             {props.cards !== null ? props.cards.map((prod, index) => {
                                 return (
-                                    <Card
-                                        store={prod.store}
-                                        brand={prod.brand}
-                                        name={prod.name}
-                                        image={prod.image}
-                                        price={prod.price}
-                                        desc={prod.desc}
-                                        link={prod.link}
-                                        key={prod.name + prod.link}
-                                        index={index}
-                                        id={prod.name + prod.link}
-                                    />
-                                )
+                                    props.id === 'column-1' ? (
+                                        <Card
+                                            store={prod.store}
+                                            brand={prod.brand}
+                                            name={prod.name}
+                                            image={prod.image}
+                                            price={prod.price}
+                                            desc={prod.desc}
+                                            link={prod.link}
+                                            key={prod.name + prod.link}
+                                            index={index}
+                                            id={prod.name + prod.link}
+                                        />
+                                    ) : (
+                                        <Tile
+                                            name={prod.name}
+                                            image={prod.image}
+                                            key={prod.name + prod.link}
+                                            index={index}
+                                            id={prod.name + prod.link}
+                                        />
+                                        )
+                                    ) 
                             }): null}
                         {provided.placeholder}
                     </Container>
                 )}
             </Droppable>
-        </div>
+        </CardCol>
     );
 }
