@@ -29,9 +29,14 @@ function ComparePage(props) {
                 id: 'column-4',
                 title: 'Category Three',
                 data: []
+            },
+            'column-5': {
+                id: 'column-5',
+                title: 'Category Four',
+                data: []
             }
         },
-        columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
+        columnOrder: ['column-1', 'column-2', 'column-3', 'column-4', 'column-5']
     })
 
     const url = process.env.REACT_APP_API_URL + props.query.toLowerCase() + "&category=" + props.category;
@@ -216,7 +221,10 @@ function ComparePage(props) {
             <br />
             <br />
             <div className="subcategoryHeader">
-                <h1>{styleSubcategory(props.query)}</h1>
+                <div>
+                    <h1>{styleSubcategory(props.query)}</h1>
+                    <p className="comparePageDesc">Drag and drop items into categories</p>
+                </div>
                 <button className="searchButton" onClick={onClickSubmit}>Submit</button>
             </div>
             <DragDropContext onDragEnd={onDragEnd}>
@@ -228,25 +236,21 @@ function ComparePage(props) {
                                 id={data.columns['column-1'].id}
                                 cards={data.columns['column-1'].data}
                             />
-                            <div class="wrapper1">
-                                <div class="div1">
+                                <div id="wrapper2">
+                                    <div className="categoryColumns">
+                                        {data.columnOrder.map(columnId => {
+                                            const column = data.columns[columnId];
+                                            return columnId !== 'column-1' ?
+                                                (
+                                                    <CardColumn
+                                                        title={column.title}
+                                                        id={column.id}
+                                                        cards={column.data}
+                                                    />
+                                                ) : null;
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="wrapper2">
-                                <div className="categoryColumns">
-                                    {data.columnOrder.map(columnId => {
-                                        const column = data.columns[columnId];
-                                        return columnId !== 'column-1' ?
-                                            (
-                                                <CardColumn
-                                                    title={column.title}
-                                                    id={column.id}
-                                                    cards={column.data}
-                                                />
-                                            ) : null;
-                                    })}
-                                </div>
-                            </div>
                         </div>
                     ) : <Oval fill="transparent" stroke="#06bcee" strokeOpacity={1} strokeWidth={2} />}
                 </div>

@@ -134,15 +134,17 @@ body {
   flex-direction: row;
 }
 
-.wrapper1, .wrapper2{
+#wrapper1, #wrapper2{
   overflow-x: scroll;
-  overflow-y: hidden;}
+  overflow-y: hidden;
+}
 
 .categoryColumns {
   margin-left: 5%;
   display: flex;
   flex-direction: row;
   overflow: auto;
+  height: 70vh;
 }
 
 .linkButton {
@@ -212,6 +214,10 @@ body {
 .comparePage{
   margin-left: 5px;
   text-align: center;
+}
+
+.comparePageDesc {
+  line-height: 0;
 }
 
 .subcategoryHeader {

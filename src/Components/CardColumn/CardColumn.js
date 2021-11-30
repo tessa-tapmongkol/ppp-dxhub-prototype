@@ -1,3 +1,4 @@
+import "./CardColumn.css"
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import Card from "../Card/Card";
@@ -5,23 +6,16 @@ import Tile from "../Tile/Tile";
 
 const Container = styled.div`
     width: 23.5rem;
-    min-height: 65vh;
+    min-height: 50vh;
     height: fit-content;
     background-color: ${props => (props.isDraggingOver ? '#bee7be' : 'white')};
     border-radius: 6px;
 `
 
-const CardCol = styled.div`
-    padding: 0 10px;
-    border: 0.1px solid black;
-    margin-right: 10px;
-    border-radius: 6px;
-`
-
 export default function CardColumn(props) {
     return (
-        <CardCol>
-            <h3>{props.title + " (" + props.cards.length + ")"}</h3>
+        <div className={props.id === "column-1" ? "allItemsCol" : "categoryCol"}>
+            <h3 className={props.id !== "column-1" ? "cardColumnTitle" : null}>{props.title + " (" + props.cards.length + ")"}</h3>
             <Droppable droppableId={props.id}>
                 {(provided, snapshot) => (
                     <Container
@@ -59,6 +53,6 @@ export default function CardColumn(props) {
                     </Container>
                 )}
             </Droppable>
-        </CardCol>
+        </div>
     );
 }
