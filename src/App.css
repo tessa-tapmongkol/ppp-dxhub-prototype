@@ -70,11 +70,13 @@ body {
   background-color: #405cf5;
   border-radius: 6px;
   border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Ubuntu, sans-serif;
   font-size: 100%;
   height: 44px;
   line-height: 1.15;
@@ -86,19 +88,22 @@ body {
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
-.seachButton:disabled, .subcategoryButton:disabled {
+.seachButton:disabled,
+.subcategoryButton:disabled {
   cursor: default;
 }
 
-
-.searchButton:focus, .subcategoryButton:focus {
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+.searchButton:focus,
+.subcategoryButton:focus {
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
+    rgba(50, 151, 211, 0.3) 0 0 0 4px;
 }
 
 .subcategoryButton {
@@ -107,11 +112,13 @@ body {
   background-color: #405cf5;
   border-radius: 6px;
   border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Ubuntu, sans-serif;
   font-size: 100%;
   height: 44px;
   line-height: 1.15;
@@ -123,7 +130,7 @@ body {
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -142,11 +149,13 @@ body {
   background-color: #405cf5;
   border-radius: 6px;
   border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Ubuntu, sans-serif;
   font-size: 100%;
   height: 44px;
   line-height: 1.15;
@@ -158,7 +167,7 @@ body {
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -174,11 +183,13 @@ body {
   background-color: #7f40f5;
   border-radius: 6px;
   border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Ubuntu, sans-serif;
   font-size: 100%;
   height: 44px;
   line-height: 1.15;
@@ -190,7 +201,7 @@ body {
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -200,17 +211,49 @@ body {
   cursor: default;
 }
 
-.comparePage{
+.differentCategoryButton {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #fff;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #7f40f5;
+  cursor: pointer;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Ubuntu, sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border-width: 2px;
+  border-color: #7f40f5;
+  margin-right: 5px;
+}
+
+.differentCategoryButton:disabled {
+  cursor: default;
+}
+
+.comparePage {
   margin-left: 5px;
   text-align: center;
 }
-
 
 .compareHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  z-index: 2;
   background-color: white;
   width: 100%;
   background: white;
@@ -228,4 +271,49 @@ body {
 
 .searchBar {
   text-align: center;
+}
+.sortModal {
+  position: absolute;
+  top: 8vh;
+  left: 8vh;
+  right: 8vh;
+  bottom: 8vh;
+  background-color: #d0c2eb;
+  border-radius: 5px;
+  width: 150vh;
+  height: 70vh;
+  overflow-y: auto;
+  padding: 40px;
+  opacity: 85%;
+}
+
+.sortNameCard {
+  border-width: 1px;
+  border-color: black;
+  height: 200px;
+  width: 290px;
+  background: white;
+  margin: 0 20px 20px 0;
+  border-radius: 5px;
+}
+
+.selectedSortNameCard {
+  border-color: black;
+  height: 200px;
+  width: 290px;
+  background: #7f40f5;
+  margin: 0 20px 20px 0;
+  border-radius: 5px;
+}
+
+.sortNameCards {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.exitModalButton {
+  cursor: pointer;
 }
