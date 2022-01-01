@@ -1,14 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../../Components/Card/Card";
-import { styleSubcategory } from "../../constants/stringFunctions";
 import ReactModal from "react-modal";
-import { sort_subcategory } from "../../constants/subcategoryitems";
+import { sort_subcategory, prod_data } from "../../constants/subcategoryitems";
 import { AiOutlineClose } from 'react-icons/ai';
-import { data } from "../../constants/subcategoryitems";
 import SortCard from "../../Components/SortCard/SortCard";
 
-function ComparePage(props) {
+function NamePage({ name }) {
     const [similar, setSimilar] = React.useState([]);
     const [showModal, setShowModal] = React.useState(false);
 
@@ -31,13 +29,13 @@ function ComparePage(props) {
     }
 
     function removeProd() {
-        data.filter((prod, i) => { return !similar.includes(i); });
+        prod_data.filter((prod, i) => { return !similar.includes(i); });
         setSimilar([]);
     }
 
     function getSimilarString() {
         var result = "";
-        const similarProd = data.filter((prod, i) => { return similar.includes(i); })
+        const similarProd = prod_data.filter((prod, i) => { return similar.includes(i); })
         similarProd.forEach(product => result += "\"" + product.name + "\" ")
         return result;
     }
@@ -59,11 +57,10 @@ function ComparePage(props) {
                     </div>
                 </div>
             </ReactModal>
-            <Link to={"/subcategories/" + props.category}><button className="subcategoryButton">Back to list of subcategories</button></Link>
             <Link to="/"><button className="searchButton">Back to search</button></Link>
             <br />
             <br />
-            <h1>{styleSubcategory(props.query)}</h1>
+            <h1>{name}</h1>
             <div className="compareHeader">
                 <h3>Select items that are similar</h3>
                 <div>
@@ -73,11 +70,11 @@ function ComparePage(props) {
             </div>
             <div className="comparePage">
                 <div className="compareCards">
-                    {data.map((prod, index) => { return getCards(prod, index); })}
+                    {prod_data.map((prod, index) => { return getCards(prod, index); })}
                 </div>
             </div>  
         </body>
     )
 }
 
-export default ComparePage;
+export default NamePage;

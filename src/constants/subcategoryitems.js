@@ -1,4 +1,4 @@
-export const data = [
+export const prod_data = [
     {
         store: "Walmart",
         brand: "Imperial",
