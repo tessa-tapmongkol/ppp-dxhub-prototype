@@ -13,7 +13,7 @@ function ClassesPage({ group, setClass }) {
             <h2>Classes</h2>
             {classes.map(clas => {
                 return (
-                    <Link to={"/class/" + clas.name} key={clas.name}>
+                    <Link to={"/class/" + clas.name} key={clas.id}>
                         <p onClick={() => setClass(clas)}>{clas.name}</p>
                     </Link>
                 );
