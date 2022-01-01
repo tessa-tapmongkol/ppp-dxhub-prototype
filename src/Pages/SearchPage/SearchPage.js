@@ -1,12 +1,13 @@
 import React from "react";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 
-function SearchPage(props) {
+function SearchPage({ setCategory, data }) {
     return (
         <body>
             <h1>Search</h1>
             <SearchBar
-                setCategory={props.setCategory}
+                data={data}
+                setCategory={setCategory}
             />
         </body>
     )

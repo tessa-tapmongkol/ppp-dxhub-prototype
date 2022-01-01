@@ -1,15 +1,13 @@
 import React from "react";
 import AutoSuggest from "react-autosuggest";
 import { Link } from "react-router-dom";
-import { styleCategory } from "./../../constants/stringFunctions"
-import { categories } from "./../../constants/subcategoryitems";
 
-function SearchBar(props) {
+function SearchBar({ data, setCategory }) {
     const [search, setSearch] = React.useState("");
     const [suggestions, setSuggestions] = React.useState([]);
 
     function getSuggestions(value) {
-        return categories.filter(category => category.toLowerCase().includes(value.toLowerCase()));
+        return data.filter(category => category?.name.toLowerCase().includes(value.toLowerCase()));
     }
 
     return (
@@ -22,11 +20,11 @@ function SearchBar(props) {
                     setSuggestions(getSuggestions(value))
                 }}
                 onSuggestionSelected={(_, { suggestion }) => {
-                    props.setCategory(suggestion.toLowerCase());
+                    setCategory(suggestion);
                     setSearch("");
                 }}
                 getSuggestionValue={suggestion => suggestion}
-                renderSuggestion={suggestion => <Link to={"/subcategories/" + suggestion.toLowerCase()}><span>{styleCategory(suggestion)}</span></Link>}
+                renderSuggestion={suggestion => <Link to={"/category/" + suggestion?.name}><span>{suggestion?.name}</span></Link>}
                 inputProps={{
                     placeholder: "Search category",
                     value: search,
