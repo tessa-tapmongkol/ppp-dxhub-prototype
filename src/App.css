@@ -136,11 +136,22 @@ body {
   touch-action: manipulation;
 }
 
-.compareCards {
+.cardColumns {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+}
+
+#wrapper1, #wrapper2{
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.categoryColumns {
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  height: 70vh;
 }
 
 .linkButton {
@@ -250,7 +261,7 @@ body {
   text-align: center;
 }
 
-.compareHeader {
+.subcategoryHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
