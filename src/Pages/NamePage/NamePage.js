@@ -1,12 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../../Components/Card/Card";
-import ReactModal from "react-modal";
-import { sort_subcategory, prod_data } from "../../constants/subcategoryitems";
-import { AiOutlineClose } from 'react-icons/ai';
-import SortCard from "../../Components/SortCard/SortCard";
+import Modal from "../../Components/Modal/Modal";
+import { prod_data } from "../../constants/subcategoryitems";
 
-function NamePage({ name }) {
+function NamePage({ name, data }) {
     const [similar, setSimilar] = React.useState([]);
     const [showModal, setShowModal] = React.useState(false);
 
@@ -33,30 +31,14 @@ function NamePage({ name }) {
         setSimilar([]);
     }
 
-    function getSimilarString() {
-        var result = "";
-        const similarProd = prod_data.filter((prod, i) => { return similar.includes(i); })
-        similarProd.forEach(product => result += "\"" + product.name + "\" ")
-        return result;
-    }
-
     return (
         <body>
-            <ReactModal isOpen={showModal} className="sortModal">
-                <div>
-                    <div style={{ textAlign: "right" }}>
-                        <AiOutlineClose onClick={() => setShowModal(false)} className="exitModalButton" />
-                    </div>
-                    <h1>{"Add " + getSimilarString() + " to"}</h1>
-                    <div className="sortNameCards">
-                        {sort_subcategory.map(sub => {
-                            return (
-                                <SortCard sub={sub} />
-                            )
-                        })}
-                    </div>
-                </div>
-            </ReactModal>
+            <Modal
+                similar={similar}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                data={data}
+            />
             <Link to="/"><button className="searchButton">Back to search</button></Link>
             <br />
             <br />

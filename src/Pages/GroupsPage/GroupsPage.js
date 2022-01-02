@@ -13,7 +13,7 @@ function GroupsPage({ category, setGroup }) {
             <h2>Groups</h2>
             {groups.map(group => {
                 return (
-                    <Link to={"/group/" + group.name} key={group.name}>
+                    <Link to={"/group/" + group.name} key={group.id}>
                         <p onClick={() => setGroup(group)}>{group.name}</p>
                     </Link>
                 );

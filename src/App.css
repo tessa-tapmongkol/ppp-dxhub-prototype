@@ -298,33 +298,29 @@ body {
   opacity: 85%;
 }
 
-.sortNameCard {
-  border-width: 1px;
-  border-color: black;
-  height: 200px;
-  width: 290px;
-  background: white;
-  margin: 0 20px 20px 0;
-  border-radius: 5px;
+.exitModalButton {
+  cursor: pointer;
 }
 
-.selectedSortNameCard {
-  border-color: black;
-  height: 200px;
-  width: 290px;
-  background: #7f40f5;
-  margin: 0 20px 20px 0;
-  border-radius: 5px;
+.compareHeader {
+  display: flex;
+  justify-content: space-between;
 }
 
-.sortNameCards {
-  margin-top: 20px;
-  text-align: center;
+.compareCards {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.exitModalButton {
-  cursor: pointer;
+.modalTile {
+  width: 100%;
+  height: 50px;
+  margin: 0;
+  border-radius: 5px;
+  background-color: white;
+  border-width: 2px;
+  border-top: black;
+  border-right: black;
+  border-left: black;
 }

@@ -13,7 +13,7 @@ function HeadingsPage({ clas, setHeading }) {
             <h2>Headings</h2>
             {headings.map(heading => {
                 return (
-                    <Link to={"/name/" + heading.name} key={heading.name}>
+                    <Link to={"/name/" + heading.name} key={heading.id}>
                         <p onClick={() => setHeading(heading)}>{heading.name}</p>
                     </Link>
                 );
