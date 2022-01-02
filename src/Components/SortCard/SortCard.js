@@ -1,11 +1,13 @@
 import React from "react";
 
-const SortCard = ({ sub }) => {
-    const [selectCard, setSelectCard] = React.useState(false);
-
+const SortCard = ({ element, updateList, updatePath }) => {
     return (
-        <div onClick={() => setSelectCard(!selectCard)} className={selectCard ? "selectedSortNameCard" : "sortNameCard"}>
-            <h3 className="sortName">{sub}</h3>
+        <div className="modalTile" onClick={() => {
+            updateList(element);
+            updatePath(element)
+        }
+        }>
+            <p style={{ textAlign: "left", padding: "10px"}}>{element.name}</p>
         </div>
     )
 };

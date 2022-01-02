@@ -31,8 +31,6 @@ function App() {
     });
   }, [])
 
-  console.log(data);
-
   return (
     <BrowserRouter>
       <Switch>
@@ -70,6 +68,7 @@ function App() {
           <Route exact path={"/name/" + heading.name}>
             <NamePage
               name={heading.name}
+              data={data}
             />
           </Route>) : null
         }
