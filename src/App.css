@@ -323,4 +323,9 @@ body {
   border-top: black;
   border-right: black;
   border-left: black;
+  cursor: pointer;
+}
+
+.pathString:hover {
+  text-decoration: underline;
 }

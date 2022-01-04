@@ -6,10 +6,11 @@ import { prod_data } from "../../constants/subcategoryitems";
 
 const Modal = ({ similar, showModal, setShowModal, data }) => {
     const [list, setList] = React.useState(data);
-    const [path, setPath] = React.useState("Categories");
     const [showAddButton, setShowAddButton] = React.useState(false);
+    const [path, setPath] = React.useState([data]);
 
     const updateList = (element) => {
+        setShowAddButton(false);
         if (element.hasOwnProperty('groups')) {
             setList(element.groups);
         } else if (element.hasOwnProperty('classes')) {
@@ -23,8 +24,17 @@ const Modal = ({ similar, showModal, setShowModal, data }) => {
     }
 
     const updatePath = (element) => {
-        const new_path = path + " > " + element.name;
+        setPath([...path, element]);
+    }
+
+    const onClickPath = (element, index) => {
+        if (index === path.length - 1) return;
+        const new_path = [];
+        for(var i = 0; i < index; i++) {
+            new_path.push(path[i]);
+        }
         setPath(new_path);
+        updateList(element);
     }
 
     const getSimilarString = () => {
@@ -41,7 +51,24 @@ const Modal = ({ similar, showModal, setShowModal, data }) => {
                     <AiOutlineClose onClick={() => setShowModal(false)} className="exitModalButton" />
                 </div>
                 <h1>{"Add " + getSimilarString() + " to"}</h1>
-                <p>{path}</p>
+                <div style={{ backgroundColor: "white", width: "fit-content", padding: "5px", borderRadius: "5px" }}>
+                    {path.map((element, index) => {
+                        if (index === 0) {
+                            return <p className="pathString" style={{ display: "inline", cursor: "pointer" }} onClick={() => {
+                                setList(data);
+                                setPath([data]);
+                                setShowAddButton(false);
+                            }}>Categories</p>
+                        } else {
+                            return (
+                                <div style={{ display: "inline" }}>
+                                    <p style={{ display: "inline" }}>{" > "}</p>
+                                    <p className="pathString" style={{ display: "inline", cursor: "pointer" }} onClick={() => onClickPath(element, index)}>{element.name}</p>
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
                 <div className="sortNameCards">
                     {list !== undefined && list !== null ? list.map(listElement => {
                         return (
