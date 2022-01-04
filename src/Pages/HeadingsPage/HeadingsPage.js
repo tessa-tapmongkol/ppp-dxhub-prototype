@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function HeadingsPage({ clas, setHeading }) {    
+const HeadingsPage = ({ clas, setHeading }) => {    
     var headings = clas.headings;
 
     return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ClassesPage({ group, setClass }) {
+const ClassesPage = ({ group, setClass }) => {
     var classes = group.classes;
     
     return (

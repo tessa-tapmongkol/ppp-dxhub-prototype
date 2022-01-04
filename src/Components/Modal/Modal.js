@@ -2,13 +2,14 @@ import React from "react";
 import ReactModal from "react-modal";
 import { AiOutlineClose } from 'react-icons/ai';
 import SortCard from "../SortCard/SortCard";
-import { prod_data } from "../../constants/subcategoryitems";
+import { prod_data } from "../../constants/dummyProductData";
 
 const Modal = ({ similar, showModal, setShowModal, data }) => {
-    const [list, setList] = React.useState(data);
-    const [showAddButton, setShowAddButton] = React.useState(false);
-    const [path, setPath] = React.useState([data]);
+    const [list, setList] = React.useState(data); // list of categories displayed in modal
+    const [showAddButton, setShowAddButton] = React.useState(false); // determines when "Add" button should be displayed
+    const [path, setPath] = React.useState([data]); // keeps track of categories user clicks on
 
+    // updates list of categories displayed to the user
     const updateList = (element) => {
         setShowAddButton(false);
         if (element.hasOwnProperty('groups')) {
@@ -23,10 +24,12 @@ const Modal = ({ similar, showModal, setShowModal, data }) => {
         }
     }
 
+    // updates the path the user has taken
     const updatePath = (element) => {
         setPath([...path, element]);
     }
 
+    // when user clicks on a part of the path, update the list of categories displayed to the user
     const onClickPath = (element, index) => {
         if (index === path.length - 1) return;
         const new_path = [];
@@ -37,6 +40,7 @@ const Modal = ({ similar, showModal, setShowModal, data }) => {
         updateList(element);
     }
 
+    // updates string of products displayed at top of modal
     const getSimilarString = () => {
         var result = "";
         const similarProd = prod_data.filter((prod, i) => { return similar.includes(i); })

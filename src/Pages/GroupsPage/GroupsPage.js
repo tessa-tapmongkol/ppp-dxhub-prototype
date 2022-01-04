@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function GroupsPage({ category, setGroup }) {    
+const GroupsPage = ({ category, setGroup }) => {    
     var groups = category.groups;
 
     return (

@@ -2,11 +2,12 @@ import React from "react";
 import AutoSuggest from "react-autosuggest";
 import { Link } from "react-router-dom";
 
-function SearchBar({ data, setCategory }) {
-    const [search, setSearch] = React.useState("");
-    const [suggestions, setSuggestions] = React.useState([]);
+const SearchBar = ({ data, setCategory }) => {
+    const [search, setSearch] = React.useState(""); // what user types in search bar
+    const [suggestions, setSuggestions] = React.useState([]); // suggestions based on what user types
 
-    function getSuggestions(value) {
+    // filters suggestions displayed on search bar based on user input
+    const getSuggestions = (value) => {
         return data.filter(category => category?.name.toLowerCase().includes(value.toLowerCase()));
     }
 

@@ -1,34 +1,35 @@
 import "./Card.css";
 import React from "react";
 
-function Card(props) {
-    const [cardStyle, setCardStyle] = React.useState(true);
+const Card = ({ setSimilar, similar, index, image, store, brand, name, price, desc, link }) => {
+    const [selectedCard, setSelectedCard] = React.useState(true); // if user has clicked on card
 
     return (
-        <div className={cardStyle ? "card" : "similarCard"} onClick={() => {
-            setCardStyle(!cardStyle);
-            if (cardStyle === true) props.setSimilar(oldSimilar => [...oldSimilar, props.index]);
-            else props.setSimilar(props.similar.filter(index => index !== props.index));
+        <div className={selectedCard ? "card" : "similarCard"} onClick={() => {
+            // when user clicks on card -> red highlight style appears on card and index of card gets added to similar array
+            setSelectedCard(!selectedCard);
+            if (selectedCard === true) setSimilar(oldSimilar => [...oldSimilar, index]);
+            else setSimilar(similar.filter(i => i !== index));
         }}>
             <table className="cardContent">
                 <tr>
                     {
-                        props.image ? <img className="cardImage" src={props.image} alt="img" /> : <img className="cardImage" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg" alt="img" />
+                        image ? <img className="cardImage" src={image} alt="img" /> : <img className="cardImage" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg" alt="img" />
                     }
                 </tr>
                 <tr className="cardInfo">
-                    <h3>{props.store}</h3>
-                    <p>{props.brand ? "Brand: " + props.brand : "Unknown"}</p>
-                    <p>{props.name ? "Name: " + props.name : "Unknown"}</p>
-                    <p>{props.price ? "Price: $" + props.price : "Unknown"}</p>
+                    <h3>{store}</h3>
+                    <p>{brand ? "Brand: " + brand : "Unknown"}</p>
+                    <p>{name ? "Name: " + name : "Unknown"}</p>
+                    <p>{price ? "Price: $" + price : "Unknown"}</p>
                     <h4>Description</h4>
                     {
-                        props.desc ? Object.values(props.desc).map(bullet => {
+                        desc ? Object.values(desc).map(bullet => {
                             return <p>{bullet}</p>
                         }) : ""
                     }
                     {                    // eslint-disable-next-line react/jsx-no-target-blank
-                    }                    <a href={props.link} target="_blank"><button class="linkButton">View on website</button></a>
+                    }                    <a href={link} target="_blank"><button class="linkButton">View on website</button></a>
                 </tr>
             </table>
         </div>

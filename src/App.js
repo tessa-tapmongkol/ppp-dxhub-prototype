@@ -9,12 +9,12 @@ import HeadingsPage from './Pages/HeadingsPage/HeadingsPage';
 import NamePage from './Pages/NamePage/NamePage';
 
 function App() {
-  const [category, setCategory] = React.useState({});
-  const [group, setGroup] = React.useState([]);
-  const [clas, setClass] = React.useState([]);
-  const [heading, setHeading] = React.useState([]);
+  const [category, setCategory] = React.useState({}); // which category user clicks on
+  const [group, setGroup] = React.useState([]); // which group user clicks on
+  const [clas, setClass] = React.useState([]); // which class user clicks on
+  const [heading, setHeading] = React.useState([]); // which heading user clicks on
 
-  const [data, setData] = React.useState();
+  const [data, setData] = React.useState(); // all data retrieved from database
 
   const getData = async () => {
     try {

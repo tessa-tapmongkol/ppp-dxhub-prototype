@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 
-function SearchPage({ setCategory, data }) {
+const SearchPage = ({ setCategory, data }) => {
     return (
         <body>
             <h1>Search</h1>

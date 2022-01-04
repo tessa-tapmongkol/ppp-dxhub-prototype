@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../../Components/Card/Card";
 import Modal from "../../Components/Modal/Modal";
-import { prod_data } from "../../constants/subcategoryitems";
+import { prod_data } from "../../constants/dummyProductData";
 
-function NamePage({ name, data }) {
-    const [similar, setSimilar] = React.useState([]);
-    const [showModal, setShowModal] = React.useState(false);
+// displays products within page (might change later, unsure if products should be in namePage or page deeper than namePage)
+const NamePage = ({ name, data }) => {
+    const [similar, setSimilar] = React.useState([]); // saves which product cards user clicks on based on their index
+    const [showModal, setShowModal] = React.useState(false); // if user clicks on "Add to different category" button
 
-    function getCards(prod, index) {
+    // render card based on product's information
+    const getCards = (prod, index) => {
         return (
             <Card
                 store={prod.store}
@@ -26,7 +28,8 @@ function NamePage({ name, data }) {
         );
     }
 
-    function removeProd() {
+    // removes products from display if user determines that they are similar
+    const removeProd = () => {
         prod_data.filter((prod, i) => { return !similar.includes(i); });
         setSimilar([]);
     }
